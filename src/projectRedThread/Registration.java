@@ -9,9 +9,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.Color;
 
-public class Registration {
+public class Registration extends Connection {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -30,7 +32,7 @@ public class Registration {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -45,6 +47,8 @@ public class Registration {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @wbp.parser.entryPoint
 	 */
 	public Registration() {
 		initialize();
@@ -144,5 +148,84 @@ public class Registration {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(285, 369, 160, 46);
 		frame.getContentPane().add(btnNewButton);
+	}
+
+	/**
+	 * Action de lire les tous les utilisateurs
+	 */
+	public static void readAll() {
+		try {
+			Statement declaration = accessDataBase.createStatement();
+			String query = "SELECT id, nom FROM users;";
+			ResultSet resultat = declaration.executeQuery(query);
+			/* Récupération des données */
+			while (resultat.next()) {
+
+				Users ing = new Users();
+				ing.setId(resultat.getInt("id"));
+				ing.setNom(resultat.getString("nom"));
+				ing.setPrenom(resultat.getString("prénom"));
+				ing.setVille(resultat.getString("ville"));
+				ing.setMail(resultat.getString("e-mail"));
+				ing.setPseudo(resultat.getString("pseudo"));
+				ing.setMotDePasse(resultat.getString("mot de passe"));
+
+				System.out.println(ing.toString());
+			}
+		} catch (Exception e) {
+			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Ici on test
+	 * 
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		openConnection();
+		// avant
+		readAll();
+		// création
+		create("");
+		readAll();
+		closeConnection();
+	}
+
+	/**
+	 * Création d'un nouvel utilisateur
+	 * 
+	 * @param utilisateur
+	 * @return // true si insertion réussite
+	 */
+
+	public static void create(String utilisateur) {
+		boolean flag = false;
+		try {
+			Statement declaration = accessDataBase.createStatement();
+			String query = "INSERT INTO `users`(`id`) " + "VALUES (\"" + utilisateur + "\")";
+			String query1 = "INSERT INTO `users`(`nom`) " + "VALUES (\"" + utilisateur + "\")";
+			String query2 = "INSERT INTO `users`(`prénom`) " + "VALUES (\"" + utilisateur + "\")";
+			String query3 = "INSERT INTO `users`(`ville`) " + "VALUES (\"" + utilisateur + "\")";
+			String query4 = "INSERT INTO `users`(`e-mail`) " + "VALUES (\"" + utilisateur + "\")";
+			String query5 = "INSERT INTO `users`(`pseudo`) " + "VALUES (\"" + utilisateur + "\")";
+			String query6 = "INSERT INTO `users`(`mot de passe`) " + "VALUES (\"" + utilisateur + "\")";
+
+			int executeUpdate = declaration.executeUpdate(query);
+			flag = (executeUpdate == 1);
+		} catch (Exception e) {
+			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
+		}
+		return;
+	}
+
+	public static boolean update(int id, String nom, String prenom, String ville, String mail, String pseudo,
+			String motDePasse) {
+		return false;
+	}
+
+	public static boolean delete(int id, String nom, String prenom, String ville, String mail, String pseudo,
+			String motDePasse) {
+		return false;
 	}
 }
