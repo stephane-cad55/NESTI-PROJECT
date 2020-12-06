@@ -7,13 +7,15 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Connection {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -43,47 +45,48 @@ public class Connection {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 571, 299);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(20, 30, 434, 14);
+		JLabel lblNewLabel = new JLabel("CONNEXION NESTI");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 22, 201, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(37, 85, 46, 14);
+		JLabel lblNewLabel_1 = new JLabel("* E-mail ou Pseudo :");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(45, 70, 130, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(76, 158, 46, 14);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(56, 210, 46, 14);
+		JLabel lblNewLabel_3 = new JLabel("* Mot De Passe :");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_3.setBounds(45, 129, 113, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(37, 236, 46, 14);
+		JLabel lblNewLabel_4 = new JLabel("* Champs obligatoires");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_4.setBounds(34, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		textField = new JTextField();
-		textField.setBounds(249, 53, 86, 20);
+		textField.setBounds(210, 68, 323, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(266, 110, 86, 20);
+		textField_1.setBounds(210, 127, 323, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(280, 171, 86, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(191, 232, 89, 23);
+		JButton btnNewButton = new JButton("CONNEXION\r\n");
+		btnNewButton.setBackground(Color.GREEN);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(295, 179, 145, 44);
 		frame.getContentPane().add(btnNewButton);
 	}
 

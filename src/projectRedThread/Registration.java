@@ -110,39 +110,39 @@ public class Registration {
 		frame.getContentPane().add(lblNewLabel_8);
 
 		textField = new JTextField();
-		textField.setBounds(170, 83, 306, 20);
+		textField.setBounds(170, 83, 409, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(170, 125, 306, 20);
+		textField_1.setBounds(170, 125, 409, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
 		textField_2 = new JTextField();
-		textField_2.setBounds(170, 170, 306, 20);
+		textField_2.setBounds(170, 170, 409, 20);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setBounds(170, 219, 306, 20);
+		textField_3.setBounds(170, 219, 409, 20);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 
 		textField_4 = new JTextField();
-		textField_4.setBounds(170, 271, 306, 20);
+		textField_4.setBounds(170, 271, 409, 20);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 
 		textField_5 = new JTextField();
-		textField_5.setBounds(170, 320, 306, 20);
+		textField_5.setBounds(170, 320, 409, 20);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
 
 		JButton btnNewButton = new JButton("INSCRIPTION");
 		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(240, 374, 160, 46);
+		btnNewButton.setBounds(285, 369, 160, 46);
 		frame.getContentPane().add(btnNewButton);
 	}
 }
