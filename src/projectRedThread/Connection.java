@@ -1,5 +1,9 @@
 package projectRedThread;
 
+/**
+ * @author stephane cadeck
+ */
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,6 +17,8 @@ import java.beans.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Connection {
 
@@ -24,10 +30,6 @@ public class Connection {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-
-		openConnection();
-		testConnection();
-		closeConnection();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -92,28 +94,33 @@ public class Connection {
 		textField_1.setColumns(10);
 
 		JButton btnNewButton = new JButton("CONNEXION\r\n");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(295, 179, 145, 44);
 		frame.getContentPane().add(btnNewButton);
+
 	}
 
 	static java.sql.Connection accessDataBase = null;
 
 	/**
-	 * Connexion à ma base de donnée NESTI
+	 * Connecting to my NESTI database
 	 * 
 	 * @throws SQLException
 	 */
 	public static void openConnection() {
-		/* Parametres de connexion */
+		/* Connection settings */
 		String url = "jdbc:mysql://127.0.0.1/nesti";
-		// nesti = nom de ma bdd
+		// nesti ==> name of my database
 		String utilisateur = "root";
 		String motDePasse = "";
 		try {
 			System.out.println("try to connect");
-			// on ajoute nos paramètres
+			// we add our parameters
 
 			accessDataBase = DriverManager.getConnection(url, utilisateur, motDePasse);
 		} catch (SQLException ex) {
@@ -122,7 +129,7 @@ public class Connection {
 	}
 
 	/**
-	 * True si la connexion est OK
+	 * True if the connection is OK
 	 * 
 	 * @return
 	 */

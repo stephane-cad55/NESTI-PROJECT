@@ -1,5 +1,9 @@
 package projectRedThread;
 
+/**
+ * @author stephane cadeck
+ */
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,9 +13,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Registration extends Connection {
 
@@ -144,6 +151,11 @@ public class Registration extends Connection {
 		textField_5.setColumns(10);
 
 		JButton btnNewButton = new JButton("INSCRIPTION");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(285, 369, 160, 46);
@@ -151,24 +163,24 @@ public class Registration extends Connection {
 	}
 
 	/**
-	 * Action de lire les tous les utilisateurs
+	 * Action to read all the users
 	 */
 	public static void readAll() {
 		try {
 			Statement declaration = accessDataBase.createStatement();
-			String query = "SELECT id, nom FROM users;";
+			String query = "SELECT userName, userFirstName, userCity, userMail, userPseudo, userPassword";
 			ResultSet resultat = declaration.executeQuery(query);
-			/* Récupération des données */
+
 			while (resultat.next()) {
 
 				Users ing = new Users();
-				ing.setId(resultat.getInt("id"));
-				ing.setNom(resultat.getString("nom"));
-				ing.setPrenom(resultat.getString("prénom"));
-				ing.setVille(resultat.getString("ville"));
-				ing.setMail(resultat.getString("e-mail"));
-				ing.setPseudo(resultat.getString("pseudo"));
-				ing.setMotDePasse(resultat.getString("mot de passe"));
+
+				ing.setUserName(resultat.getString("userName"));
+				ing.setUserFirstName(resultat.getString("userFirstName"));
+				ing.setUserCity(resultat.getString("userCity"));
+				ing.setUserMail(resultat.getString("userMail"));
+				ing.setUserPseudo(resultat.getString("userPseudo"));
+				ing.setUserPassword(resultat.getString("userPassword"));
 
 				System.out.println(ing.toString());
 			}
@@ -178,40 +190,27 @@ public class Registration extends Connection {
 	}
 
 	/**
-	 * Ici on test
+	 * Creating a new user
 	 * 
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
-		openConnection();
-		// avant
-		readAll();
-		// création
-		create("");
-		readAll();
-		closeConnection();
-	}
-
-	/**
-	 * Création d'un nouvel utilisateur
-	 * 
-	 * @param utilisateur
-	 * @return // true si insertion réussite
+	 * @param user
+	 * @return // true if successful insertion
 	 */
 
-	public static void create(String utilisateur) {
+	public static void create(String userName, String userFirstName, String userCity, String userMail,
+			String userPseudo, String userPassword) {
 		boolean flag = false;
 		try {
-			Statement declaration = accessDataBase.createStatement();
-			String query = "INSERT INTO `users`(`id`) " + "VALUES (\"" + utilisateur + "\")";
-			String query1 = "INSERT INTO `users`(`nom`) " + "VALUES (\"" + utilisateur + "\")";
-			String query2 = "INSERT INTO `users`(`prénom`) " + "VALUES (\"" + utilisateur + "\")";
-			String query3 = "INSERT INTO `users`(`ville`) " + "VALUES (\"" + utilisateur + "\")";
-			String query4 = "INSERT INTO `users`(`e-mail`) " + "VALUES (\"" + utilisateur + "\")";
-			String query5 = "INSERT INTO `users`(`pseudo`) " + "VALUES (\"" + utilisateur + "\")";
-			String query6 = "INSERT INTO `users`(`mot de passe`) " + "VALUES (\"" + utilisateur + "\")";
 
-			int executeUpdate = declaration.executeUpdate(query);
+			String query = "INSERT INTO `users`(`userName`, `userFirstName`, `userCity`, `userMail`, `userPseudo`, `userPassword`,)value(?,?,?,?,?,?)";
+			PreparedStatement declaration = accessDataBase.prepareStatement(query);
+			declaration.setString(1, userName);
+			declaration.setString(2, userFirstName);
+			declaration.setString(3, userCity);
+			declaration.setString(4, userMail);
+			declaration.setString(5, userPseudo);
+			declaration.setString(6, userPassword);
+
+			int executeUpdate = declaration.executeUpdate();
 			flag = (executeUpdate == 1);
 		} catch (Exception e) {
 			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());

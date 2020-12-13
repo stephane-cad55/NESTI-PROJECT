@@ -1,72 +1,85 @@
 package projectRedThread;
 
+/**
+ * @author Stephane Cadeck
+ */
+
 public class Users {
 
-	private int id;
-	private String nom;
-	private String prenom;
-	private String ville;
-	private String mail;
-	private String pseudo;
-	private String motDePasse;
+	private String userName;
+	private String userFirstName;
+	private String userCity;
+	private String userMail;
+	private String userPseudo;
+	private String userPassword;
 
-	public int getId() {
-		return id;
+	/**
+	 * @constructor
+	 */
+	public Users() {
+
+		this.userName = userName;
+		this.userFirstName = userFirstName;
+		this.userCity = userCity;
+		this.userMail = userMail;
+		this.userPseudo = userPseudo;
+		this.userPassword = userPassword;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	/**
+	 * @getters and setters
+	 */
+	public String getUserName() {
+		return userName;
 	}
 
-	public String getNom() {
-		return nom;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public String getUserFirstName() {
+		return userFirstName;
 	}
 
-	public String getPrenom() {
-		return prenom;
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public String getUserCity() {
+		return userCity;
 	}
 
-	public String getVille() {
-		return ville;
+	public void setUserCity(String userCity) {
+		this.userCity = userCity;
 	}
 
-	public void setVille(String ville) {
-		this.ville = ville;
+	public String getUserMail() {
+		return userMail;
 	}
 
-	public String getMail() {
-		return mail;
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public String getUserPseudo() {
+		return userPseudo;
 	}
 
-	public String getPseudo() {
-		return pseudo;
+	public void setUserPseudo(String userPseudo) {
+		this.userPseudo = userPseudo;
 	}
 
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public String getMotDePasse() {
-		return motDePasse;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
-	}
-
+	@Override
 	public String toString() {
-		return "Identifiant :  " + this.id + "Nom : " + this.nom;
+		return "Users [userName=" + userName + ", userFirstName=" + userFirstName + ", userCity=" + userCity
+				+ ", userMail=" + userMail + ", userPseudo=" + userPseudo + ", userPassword=" + userPassword + "]";
 	}
 }
