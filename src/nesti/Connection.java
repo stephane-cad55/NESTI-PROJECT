@@ -1,4 +1,4 @@
-package projectRedThread;
+package nesti;
 
 /**
  * @author stephane cadeck
@@ -27,23 +27,6 @@ public class Connection {
 	private JTextField textField_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Connection window = new Connection();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public Connection() {
@@ -55,6 +38,9 @@ public class Connection {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+
+		frame.setVisible(true);
+
 		frame.setBounds(100, 100, 571, 299);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -80,7 +66,7 @@ public class Connection {
 		JLabel lblNewLabel_4 = new JLabel("* Champs obligatoires");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_4.setBounds(34, 195, 166, 14);
+		lblNewLabel_4.setBounds(10, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
 		textField = new JTextField();
@@ -100,79 +86,21 @@ public class Connection {
 		});
 		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(295, 179, 145, 44);
+		btnNewButton.setBounds(169, 179, 130, 44);
 		frame.getContentPane().add(btnNewButton);
 
-	}
-
-	static java.sql.Connection accessDataBase = null;
-
-	/**
-	 * Connecting to my NESTI database
-	 * 
-	 * @throws SQLException
-	 */
-	public static void openConnection() {
-		/* Connection settings */
-		String url = "jdbc:mysql://127.0.0.1/nesti";
-		// nesti ==> name of my database
-		String utilisateur = "root";
-		String motDePasse = "";
-		try {
-			System.out.println("try to connect");
-			// we add our parameters
-
-			accessDataBase = DriverManager.getConnection(url, utilisateur, motDePasse);
-		} catch (SQLException ex) {
-			System.err.print(Connection.class.getName() + ex.getMessage());
-		}
-	}
-
-	/**
-	 * True if the connection is OK
-	 * 
-	 * @return
-	 */
-	public static boolean testConnection() {
-		boolean flag = false;
-		try {
-			if (accessDataBase != null) {
-				if (!accessDataBase.isClosed()) {
-					System.out.println("Connexion au serveur... OK");
-					flag = true;
-				}
+		JButton btnNewButton_1 = new JButton("INSCRIPTION");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Registration viewRegistration = new Registration();
 			}
-		} catch (SQLException ex) {
-			System.err.print(Connection.class.getName() + ex.getMessage());
-		}
-		return flag;
+		});
+		btnNewButton_1.setBackground(new Color(102, 255, 255));
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnNewButton_1.setBounds(309, 179, 224, 44);
+		frame.getContentPane().add(btnNewButton_1);
+
 	}
 
-	public static void closeConnection() {
-		if (accessDataBase != null) {
-			try {
-				accessDataBase.close();
-				System.out.println("Close connection");
-			} catch (SQLException e) {
-				System.err.println("Erreur fermeture: " + e.getMessage());
-			}
-		}
-	}
-
-	public static void create(String users) {
-		try {
-			Statement declaration = (Statement) accessDataBase.createStatement();
-			String query = "INSERT INTO `users`(`nom`) " + "VALUES ('" + users + "')";
-
-			int executeUpdate = ((java.sql.Statement) declaration).executeUpdate(query);
-			if (executeUpdate == 1) {
-				System.out.println("insertion utilisateur effectué ! ");
-			} else {
-				System.out.println("insertion utilisateur non effectue");
-			}
-
-		} catch (Exception e) {
-			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
-		}
-	}
 }

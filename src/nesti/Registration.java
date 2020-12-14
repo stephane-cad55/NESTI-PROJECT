@@ -1,4 +1,4 @@
-package projectRedThread;
+package nesti;
 
 /**
  * @author stephane cadeck
@@ -8,6 +8,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -37,28 +39,13 @@ public class Registration extends Connection {
 	private JLabel lblNewLabel_8;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main1(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registration window = new Registration();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
 	public Registration() {
 		initialize();
+
 	}
 
 	/**
@@ -66,6 +53,9 @@ public class Registration extends Connection {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+
+		frame.setVisible(true);
+
 		frame.setBounds(100, 100, 622, 486);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -162,69 +152,4 @@ public class Registration extends Connection {
 		frame.getContentPane().add(btnNewButton);
 	}
 
-	/**
-	 * Action to read all the users
-	 */
-	public static void readAll() {
-		try {
-			Statement declaration = accessDataBase.createStatement();
-			String query = "SELECT userName, userFirstName, userCity, userMail, userPseudo, userPassword";
-			ResultSet resultat = declaration.executeQuery(query);
-
-			while (resultat.next()) {
-
-				Users ing = new Users();
-
-				ing.setUserName(resultat.getString("userName"));
-				ing.setUserFirstName(resultat.getString("userFirstName"));
-				ing.setUserCity(resultat.getString("userCity"));
-				ing.setUserMail(resultat.getString("userMail"));
-				ing.setUserPseudo(resultat.getString("userPseudo"));
-				ing.setUserPassword(resultat.getString("userPassword"));
-
-				System.out.println(ing.toString());
-			}
-		} catch (Exception e) {
-			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
-		}
-	}
-
-	/**
-	 * Creating a new user
-	 * 
-	 * @param user
-	 * @return // true if successful insertion
-	 */
-
-	public static void create(String userName, String userFirstName, String userCity, String userMail,
-			String userPseudo, String userPassword) {
-		boolean flag = false;
-		try {
-
-			String query = "INSERT INTO `users`(`userName`, `userFirstName`, `userCity`, `userMail`, `userPseudo`, `userPassword`,)value(?,?,?,?,?,?)";
-			PreparedStatement declaration = accessDataBase.prepareStatement(query);
-			declaration.setString(1, userName);
-			declaration.setString(2, userFirstName);
-			declaration.setString(3, userCity);
-			declaration.setString(4, userMail);
-			declaration.setString(5, userPseudo);
-			declaration.setString(6, userPassword);
-
-			int executeUpdate = declaration.executeUpdate();
-			flag = (executeUpdate == 1);
-		} catch (Exception e) {
-			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
-		}
-		return;
-	}
-
-	public static boolean update(int id, String nom, String prenom, String ville, String mail, String pseudo,
-			String motDePasse) {
-		return false;
-	}
-
-	public static boolean delete(int id, String nom, String prenom, String ville, String mail, String pseudo,
-			String motDePasse) {
-		return false;
-	}
 }

@@ -1,4 +1,4 @@
-package projectRedThread;
+package nesti;
 
 /**
  * @author Stephane Cadeck
@@ -14,9 +14,10 @@ public class Users {
 	private String userPassword;
 
 	/**
-	 * @constructor
+	 * @Generate constructor
 	 */
-	public Users() {
+	public Users(String userName, String userFirstName, String userCity, String userMail, String userPseudo,
+			String userPassword) {
 
 		this.userName = userName;
 		this.userFirstName = userFirstName;
@@ -26,8 +27,12 @@ public class Users {
 		this.userPassword = userPassword;
 	}
 
+	public Users() {
+
+	}
+
 	/**
-	 * @getters and setters
+	 * @Generate getters and setters
 	 */
 	public String getUserName() {
 		return userName;
@@ -77,6 +82,9 @@ public class Users {
 		this.userPassword = userPassword;
 	}
 
+	/**
+	 * Generate toString
+	 */
 	@Override
 	public String toString() {
 		return "Users [userName=" + userName + ", userFirstName=" + userFirstName + ", userCity=" + userCity
