@@ -47,7 +47,7 @@ public class Query extends MyConnection {
 			openConnection();
 
 			String query = "INSERT INTO `users`(`userName`, `userFirstName`, `userCity`, `userMail`, `userPseudo`, `userPassword`)values(?,?,?,?,?,?)";
-			PreparedStatement declaration = accessDataBase.prepareStatement(query);
+			PreparedStatement declaration = MyConnection.accessDataBase.prepareStatement(query);
 			declaration.setString(1, user.getUserName());
 			declaration.setString(2, user.getUserFirstName());
 			declaration.setString(3, user.getUserCity());
@@ -61,6 +61,37 @@ public class Query extends MyConnection {
 			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
 		}
 		return;
+
+	}
+
+	public static void selectUser(String email, String pseudo, String password) {
+
+		try {
+
+			openConnection();
+			String query = "SELECT * FROM `users` WHERE userMail = ? OR userPseudo = ? AND userPassword = ?";
+			PreparedStatement declaration = MyConnection.accessDataBase.prepareStatement(query);
+			declaration.setString(1, email);
+			declaration.setString(2, pseudo);
+			declaration.setString(3, password);
+			ResultSet resultat = declaration.executeQuery();
+
+			while (resultat.next()) {
+
+				/*Users user = new Users();
+
+				user.setUserName(resultat.getString("userName"));
+				user.setUserFirstName(resultat.getString("userFirstName"));
+				user.setUserCity(resultat.getString("userCity"));
+				user.setUserMail(resultat.getString("userMail"));
+				user.setUserPseudo(resultat.getString("userPseudo"));
+				user.setUserPassword(resultat.getString("userPassword"));*/
+
+				System.out.println("Success");
+			}
+		} catch (Exception e) {
+			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
+		}
 	}
 
 	public static boolean update(int id, String nom, String prenom, String ville, String mail, String pseudo,

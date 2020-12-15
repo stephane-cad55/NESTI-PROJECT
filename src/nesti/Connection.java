@@ -82,6 +82,8 @@ public class Connection {
 		JButton btnNewButton = new JButton("CONNEXION\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Query.selectUser(textField.getText(), textField.getText(), textField_1.getText());
+
 			}
 		});
 		btnNewButton.setBackground(Color.GREEN);
