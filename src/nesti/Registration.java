@@ -5,13 +5,13 @@ package nesti;
  */
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -171,11 +171,11 @@ public class Registration extends Connection {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				addressEmailValid();
-				forceMdp();
-				alphabet();
-				
+
+				addressEmailValid(textField_3.getText());
+				forceMdp(textField_5.getText());
+				alphabet(textField_5.getText());
+
 				if (!textField_3.getText().equals("")) {
 					Users user = new Users(textField.getText(), textField_1.getText(), textField_2.getText(),
 							textField_3.getText(), textField_4.getText(), textField_5.getText());
@@ -186,77 +186,88 @@ public class Registration extends Connection {
 					JOptionPane.showMessageDialog(frame, "Le format d'email est incorrect, il est obligatoire!");
 				}
 			}
-			
-			public static boolean addressEmailValid(String userMail) {
-		        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$";
-		        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-		        java.util.regex.Matcher m = p.matcher(email);
-		        boolean IsMatch = m.matches();
-		        System.out.println(IsMatch);
-		        if (IsMatch == false) {
-		            textField_3.setText("E-mail invalide");
-		            textField_3.setBackground(Color.RED);
-		            System.out.println(IsMatch);
-		            IsMatch=false;
-		        }else {
-		            IsMatch = m.matches();
-		            System.out.println(IsMatch+" aef");
-		        }
-		        System.out.println(IsMatch+"123");
-		        return IsMatch;
-		    }
-			
-			public static long forceMdp(String userPassword) {
-		        // La Longueur
-		        int l = userPassword.length();
-		        // Le nombre de caractères
-		        int n = alphabet(userPassword);
-
-		        // Appliquer la formule
-		        double force = l * (Math.log(n) / Math.log(2));
-		        long forceRest;
-		        if (force <= 82) {
-		            textField_5.setText("Mot de passe invalide");
-		            textField_5.setBackground(Color.RED);
-		            forceRest = 0;
-		        } else {
-		            forceRest = Math.round(force);
-		        }
-		        return forceRest;
-		    }
-
-		    public static int alphabet(String userPassword) {
-		        int n = 0;
-		        Pattern regex1 = Pattern.compile("[0-9]");
-		        Matcher matcher1 = regex1.matcher(userPassword);
-		        if (matcher1.find()) {
-		            // if (mdp.matches("")) {
-		            n += 10;
-		        }
-		        Pattern regex2 = Pattern.compile("[a-z]");
-		        Matcher matcher2 = regex2.matcher(userPassword);
-		        if (matcher2.find()) {
-		            // if (mdp.matches("a-z")) {
-		            n += 26;
-		        }
-		        Pattern regex3 = Pattern.compile("[A-Z]");
-		        Matcher matcher3 = regex3.matcher(userPassword);
-		        if (matcher3.find()) {
-		            // if (mdp.matches("A-Z")) {
-		            n += 26;
-		        }
-		        Pattern regex = Pattern.compile("[$&+,:;=?@#|]");
-		        Matcher matcher = regex.matcher(userPassword);
-		        if (matcher.find()) {
-		            n += 8;
-		        }
-
-		        return n;
-		    }
 		});
 		btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(285, 369, 160, 46);
 		frame.getContentPane().add(btnNewButton);
+	}
+
+	/**
+	 * email function.
+	 * 
+	 * @param userMail.
+	 * @return
+	 */
+	public boolean addressEmailValid(String userMail) {
+		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		java.util.regex.Matcher m = p.matcher(userMail);
+		boolean IsMatch = m.matches();
+		System.out.println(IsMatch);
+		if (IsMatch == false) {
+			textField_3.setText("E-mail invalide");
+			textField_3.setBackground(Color.RED);
+			System.out.println(IsMatch);
+			IsMatch = false;
+		} else {
+			IsMatch = m.matches();
+		}
+
+		return IsMatch;
+	}
+
+	/**
+	 * Password strength function.
+	 * 
+	 * @param userPassword.
+	 * @return
+	 */
+	public long forceMdp(String userPassword) {
+		// La Longueur
+		int l = userPassword.length();
+		// Le nombre de caractères
+		int n = alphabet(userPassword);
+
+		// Appliquer la formule
+		double force = l * (Math.log(n) / Math.log(2));
+		long forceRest;
+		if (force <= 82) {
+			textField_5.setText("Mot de passe invalide");
+			textField_5.setBackground(Color.RED);
+			forceRest = 0;
+		} else {
+			forceRest = Math.round(force);
+		}
+		return forceRest;
+	}
+
+	public int alphabet(String userPassword) {
+		int n = 0;
+		Pattern regex1 = Pattern.compile("[0-9]");
+		Matcher matcher1 = regex1.matcher(userPassword);
+		if (matcher1.find()) {
+			// if (mdp.matches("")) {
+			n += 10;
+		}
+		Pattern regex2 = Pattern.compile("[a-z]");
+		Matcher matcher2 = regex2.matcher(userPassword);
+		if (matcher2.find()) {
+			// if (mdp.matches("a-z")) {
+			n += 26;
+		}
+		Pattern regex3 = Pattern.compile("[A-Z]");
+		Matcher matcher3 = regex3.matcher(userPassword);
+		if (matcher3.find()) {
+			// if (mdp.matches("A-Z")) {
+			n += 26;
+		}
+		Pattern regex = Pattern.compile("[$&+,:;=?@#|]");
+		Matcher matcher = regex.matcher(userPassword);
+		if (matcher.find()) {
+			n += 8;
+		}
+
+		return n;
 	}
 }
