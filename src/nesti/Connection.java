@@ -1,7 +1,7 @@
 package nesti;
 
 /**
- * @author stephane cadeck
+ *  @author stephane cadeck.
  */
 
 import java.awt.EventQueue;
@@ -38,6 +38,7 @@ public class Connection {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(102, 102, 0));
 
 		frame.setVisible(true);
 
@@ -46,63 +47,77 @@ public class Connection {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("CONNEXION NESTI");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 22, 201, 14);
 		frame.getContentPane().add(lblNewLabel);
 
+		/**
+		 * Connection to the nesti site with filling in the required information.
+		 */
 		JLabel lblNewLabel_1 = new JLabel("* E-mail ou Pseudo :");
+		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(45, 70, 130, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 
 		JLabel lblNewLabel_3 = new JLabel("* Mot De Passe :");
+		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_3.setBounds(45, 129, 113, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("* Champs obligatoires");
+		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBounds(10, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
 		textField = new JTextField();
+		textField.setBackground(Color.LIGHT_GRAY);
 		textField.setBounds(210, 68, 323, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
+		textField_1.setBackground(Color.LIGHT_GRAY);
 		textField_1.setBounds(210, 127, 323, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
+		/**
+		 * nesti website login button for already registered users.
+		 */
 		JButton btnNewButton = new JButton("CONNEXION\r\n");
+		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Query.selectUser(textField.getText(), textField.getText(), textField_1.getText());
-
 			}
 		});
-		btnNewButton.setBackground(Color.GREEN);
+		btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(169, 179, 130, 44);
 		frame.getContentPane().add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("INSCRIPTION");
+		/**
+		 * nesti site registration button (new users).
+		 */
+		JButton btnNewButton_1 = new JButton("INSCRIPTION\r\n(nouvel utilisateur)");
+		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				Registration viewRegistration = new Registration();
 			}
 		});
-		btnNewButton_1.setBackground(new Color(102, 255, 255));
+		btnNewButton_1.setBackground(Color.BLACK);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnNewButton_1.setBounds(309, 179, 224, 44);
 		frame.getContentPane().add(btnNewButton_1);
-
 	}
-
 }

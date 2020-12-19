@@ -1,5 +1,9 @@
 package nesti;
 
+/**
+ *  @author stephane cadeck.
+ */
+
 import java.beans.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,9 +12,9 @@ public class MyConnection {
 	static java.sql.Connection accessDataBase = null;
 
 	/**
-	 * Connecting to my NESTI database
+	 * Connecting to my nesti database.
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public static void openConnection() {
 		/* Connection settings */
@@ -29,7 +33,7 @@ public class MyConnection {
 	}
 
 	/**
-	 * True if the connection is OK
+	 * True if the connection is OK.
 	 * 
 	 * @return
 	 */
@@ -75,5 +79,4 @@ public class MyConnection {
 			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
 		}
 	}
-
 }

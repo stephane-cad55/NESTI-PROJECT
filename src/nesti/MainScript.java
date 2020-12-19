@@ -1,5 +1,9 @@
 package nesti;
 
+/**
+ * @author stephane cadeck. 
+ */
+
 import java.awt.EventQueue;
 
 public class MainScript {
@@ -13,7 +17,7 @@ public class MainScript {
 			public void run() {
 				try {
 					Connection window = new Connection();
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

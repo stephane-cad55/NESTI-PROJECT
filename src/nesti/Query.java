@@ -1,5 +1,9 @@
 package nesti;
 
+/**
+ *  @author stephane cadeck.
+ */
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -7,7 +11,7 @@ import java.sql.Statement;
 public class Query extends MyConnection {
 
 	/**
-	 * Action to read all the users
+	 * Action to read all the users.
 	 */
 	public static void readAll() {
 		try {
@@ -34,10 +38,10 @@ public class Query extends MyConnection {
 	}
 
 	/**
-	 * Creating a new user
+	 * Creating a new user.
 	 * 
 	 * @param user
-	 * @return // true if successful insertion
+	 * @return // true if successful insertion.
 	 */
 
 	public static void create(Users user) {
@@ -78,14 +82,16 @@ public class Query extends MyConnection {
 
 			while (resultat.next()) {
 
-				/*Users user = new Users();
-
-				user.setUserName(resultat.getString("userName"));
-				user.setUserFirstName(resultat.getString("userFirstName"));
-				user.setUserCity(resultat.getString("userCity"));
-				user.setUserMail(resultat.getString("userMail"));
-				user.setUserPseudo(resultat.getString("userPseudo"));
-				user.setUserPassword(resultat.getString("userPassword"));*/
+				/*
+				 * Users user = new Users();
+				 * 
+				 * user.setUserName(resultat.getString("userName"));
+				 * user.setUserFirstName(resultat.getString("userFirstName"));
+				 * user.setUserCity(resultat.getString("userCity"));
+				 * user.setUserMail(resultat.getString("userMail"));
+				 * user.setUserPseudo(resultat.getString("userPseudo"));
+				 * user.setUserPassword(resultat.getString("userPassword"));
+				 */
 
 				System.out.println("Success");
 			}
@@ -103,5 +109,4 @@ public class Query extends MyConnection {
 			String motDePasse) {
 		return false;
 	}
-
 }

@@ -1,7 +1,7 @@
 package nesti;
 
 /**
- * @author Stephane Cadeck
+ * @author Stephane Cadeck.
  */
 
 public class Users {
@@ -14,7 +14,7 @@ public class Users {
 	private String userPassword;
 
 	/**
-	 * @Generate constructor
+	 * @Generate constructor.
 	 */
 	public Users(String userName, String userFirstName, String userCity, String userMail, String userPseudo,
 			String userPassword) {
@@ -32,7 +32,7 @@ public class Users {
 	}
 
 	/**
-	 * @Generate getters and setters
+	 * @Generate getters and setters.
 	 */
 	public String getUserName() {
 		return userName;
@@ -83,7 +83,7 @@ public class Users {
 	}
 
 	/**
-	 * Generate toString
+	 * Generate toString.
 	 */
 	@Override
 	public String toString() {
