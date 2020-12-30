@@ -172,18 +172,27 @@ public class Registration extends Connection {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				addressEmailValid(textField_3.getText());
-				forceMdp(textField_5.getText());
-				alphabet(textField_5.getText());
-
 				if (!textField_3.getText().equals("")) {
-					Users user = new Users(textField.getText(), textField_1.getText(), textField_2.getText(),
-							textField_3.getText(), textField_4.getText(), textField_5.getText());
-					Query.create(user);
-					frame.dispose();
-					Profil viewProfil = new Profil();
-				} else {
-					JOptionPane.showMessageDialog(frame, "Le format d'email est incorrect, il est obligatoire!");
+
+					if (addressEmailValid(textField_3.getText())) {
+
+						if (forceMdp(textField_5.getText()) >= 83) {
+
+							Users user = new Users(textField.getText(), textField_1.getText(), textField_2.getText(),
+									textField_3.getText(), textField_4.getText(), textField_5.getText());
+							Query.create(user);
+							frame.dispose();
+							Profil viewProfil = new Profil();
+
+						} else {
+
+							JOptionPane.showMessageDialog(frame, "Le mot de passe n'est pas assez fort!");
+						}
+
+					} else {
+
+						JOptionPane.showMessageDialog(frame, "Le format d'email est incorrect, il est obligatoire!");
+					}
 				}
 			}
 		});

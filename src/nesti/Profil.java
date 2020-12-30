@@ -26,6 +26,9 @@ public class Profil {
 	private JTextField textField_3;
 	private JTextField textField_4;
 
+	public static Users user;
+	
+	
 	/**
 	 * Create the application.
 	 */
@@ -86,7 +89,7 @@ public class Profil {
 		lblNewLabel_5.setBounds(29, 323, 95, 14);
 		frame.getContentPane().add(lblNewLabel_5);
 
-		textField = new JTextField();
+		//textField = new JTextField(user.getUserName());
 		textField.setBackground(Color.LIGHT_GRAY);
 		textField.setBounds(182, 106, 333, 20);
 		frame.getContentPane().add(textField);

@@ -97,6 +97,8 @@ public class Connection {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Query.selectUser(textField.getText(), textField.getText(), textField_1.getText());
+				frame.dispose();
+				Profil viewProfil = new Profil();
 			}
 		});
 		btnNewButton.setBackground(Color.BLACK);

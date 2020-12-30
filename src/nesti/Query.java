@@ -21,16 +21,16 @@ public class Query extends MyConnection {
 
 			while (resultat.next()) {
 
-				Users ing = new Users();
+				Users x = new Users();
 
-				ing.setUserName(resultat.getString("userName"));
-				ing.setUserFirstName(resultat.getString("userFirstName"));
-				ing.setUserCity(resultat.getString("userCity"));
-				ing.setUserMail(resultat.getString("userMail"));
-				ing.setUserPseudo(resultat.getString("userPseudo"));
-				ing.setUserPassword(resultat.getString("userPassword"));
+				x.setUserName(resultat.getString("userName"));
+				x.setUserFirstName(resultat.getString("userFirstName"));
+				x.setUserCity(resultat.getString("userCity"));
+				x.setUserMail(resultat.getString("userMail"));
+				x.setUserPseudo(resultat.getString("userPseudo"));
+				x.setUserPassword(resultat.getString("userPassword"));
 
-				System.out.println(ing.toString());
+				System.out.println(x.toString());
 			}
 		} catch (Exception e) {
 			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
@@ -95,6 +95,11 @@ public class Query extends MyConnection {
 
 				System.out.println("Success");
 			}
+			
+		/*	if(resultat.next() == true) {
+				Users bdd = new Users(resultat.getString(1), resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getString(5), resultat.getString(6));
+				Profil.user = bdd;
+			}*/
 		} catch (Exception e) {
 			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
 		}
