@@ -119,6 +119,7 @@ public class Profil {
 		JButton btnNewButton = new JButton("MODIFIER OU COMPLETER VOS INFORMATIONS");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);
