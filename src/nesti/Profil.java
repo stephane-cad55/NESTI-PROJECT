@@ -20,11 +20,6 @@ import java.awt.event.ActionEvent;
 public class Profil {
 
 	private JFrame frame;
-	private JTextField name;
-	private JTextField city;
-	private JTextField mail;
-	private JTextField pseudo;
-	private JTextField passWord;
 
 	public static Users user;
 

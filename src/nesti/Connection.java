@@ -25,9 +25,7 @@ import java.awt.event.ActionEvent;
 public class Connection {
 
 	private JFrame frame;
-	private JTextField textUserId;
-	private JTextField textUserPassWord;
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -79,11 +77,11 @@ public class Connection {
 		lblNewLabel_4.setBounds(10, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
-		JTextField textUserId = new JTextField();
-		textUserId.setBackground(Color.LIGHT_GRAY);
-		textUserId.setBounds(210, 68, 323, 20);
-		frame.getContentPane().add(textUserId);
-		textUserId.setColumns(10);
+		JTextField textUserMailOrPseudo = new JTextField();
+		textUserMailOrPseudo.setBackground(Color.LIGHT_GRAY);
+		textUserMailOrPseudo.setBounds(210, 68, 323, 20);
+		frame.getContentPane().add(textUserMailOrPseudo);
+		textUserMailOrPseudo.setColumns(10);
 
 		JTextField textUserPassword = new JTextField();
 		textUserPassword.setBackground(Color.LIGHT_GRAY);
@@ -98,8 +96,8 @@ public class Connection {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String userId = textUserId.getText();
+				
+				String userId = textUserMailOrPseudo.getText();
 				String userPassword = textUserPassword.getText();
 
 				if (Query.selectUser(userId, userPassword) == true) {

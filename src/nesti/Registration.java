@@ -25,18 +25,6 @@ import java.awt.event.ActionEvent;
 public class Registration extends Connection {
 
 	private JFrame frame;
-	private JTextField name;
-	private JTextField firstName;
-	private JTextField city;
-	private JTextField mail;
-	private JTextField pseudo;
-	private JTextField passWord;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
 
 	/**
 	 * Create the application.
@@ -45,7 +33,6 @@ public class Registration extends Connection {
 	 */
 	public Registration() {
 		initialize();
-
 	}
 
 	/**
@@ -85,14 +72,14 @@ public class Registration extends Connection {
 		lblNewLabel_2.setBounds(27, 86, 89, 14);
 		frame.getContentPane().add(lblNewLabel_2);
 
-		lblNewLabel_3 = new JLabel("Votre pr\u00E9nom :");
+		JLabel lblNewLabel_3 = new JLabel("Votre pr\u00E9nom :");
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(31, 128, 100, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 
-		lblNewLabel_4 = new JLabel("Ville :");
+		JLabel lblNewLabel_4 = new JLabel("Ville :");
 		lblNewLabel_4.setBackground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -100,28 +87,28 @@ public class Registration extends Connection {
 		lblNewLabel_4.setBounds(27, 172, 46, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
-		lblNewLabel_5 = new JLabel("* E-mail : ");
+		JLabel lblNewLabel_5 = new JLabel("* E-mail : ");
 		lblNewLabel_5.setForeground(Color.WHITE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(22, 221, 71, 14);
 		frame.getContentPane().add(lblNewLabel_5);
 
-		lblNewLabel_6 = new JLabel("* Pseudo : ");
+		JLabel lblNewLabel_6 = new JLabel("* Pseudo : ");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setForeground(Color.WHITE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_6.setBounds(16, 273, 89, 14);
 		frame.getContentPane().add(lblNewLabel_6);
 
-		lblNewLabel_7 = new JLabel("* Mot De Passe : ");
+		JLabel lblNewLabel_7 = new JLabel("* Mot De Passe : ");
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7.setForeground(Color.WHITE);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_7.setBounds(20, 325, 114, 14);
 		frame.getContentPane().add(lblNewLabel_7);
 
-		lblNewLabel_8 = new JLabel("* Champs obligatoires");
+		JLabel lblNewLabel_8 = new JLabel("* Champs obligatoires");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_8.setForeground(Color.WHITE);
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -175,15 +162,24 @@ public class Registration extends Connection {
 
 				if (!mail.getText().equals("")) {
 
-					if (addressEmailValid(mail.getText())) {
+					if (addressEmailValid(mail.getText(), passWord)) {
 
-						if (forceMdp(userPassword, passWord) >= 83) {
+						String enterPassword = passWord.getText();
+						System.out.println(enterPassword);
+
+						if (forceMdp(enterPassword, passWord) >= 83) {
+
+							MyConnection.openConnection();
 
 							Users user = new Users(name.getText(), firstName.getText(), city.getText(), mail.getText(),
 									pseudo.getText(), passWord.getText());
+
 							Query.create(user);
+
+							MyConnection.closeConnection();
+
 							frame.dispose();
-							// Profil viewProfil = new Profil();
+							Connection viewConnection = new Connection();
 
 						} else {
 
@@ -209,18 +205,25 @@ public class Registration extends Connection {
 	 * @param userMail.
 	 * @return
 	 */
-	public boolean addressEmailValid(String userMail) {
+	public boolean addressEmailValid(String userMail, JTextField mail) {
+
 		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
 		java.util.regex.Matcher m = p.matcher(userMail);
+
 		boolean IsMatch = m.matches();
+
 		System.out.println(IsMatch);
+
 		if (IsMatch == false) {
+
 			mail.setText("E-mail invalide");
 			mail.setBackground(Color.RED);
 			System.out.println(IsMatch);
 			IsMatch = false;
+
 		} else {
+
 			IsMatch = m.matches();
 		}
 
@@ -233,45 +236,62 @@ public class Registration extends Connection {
 	 * @param userPassword.
 	 * @return
 	 */
-	public long forceMdp(String userPassword, JTextField passWord) {
+	public long forceMdp(String enterPassword, JTextField passWord) {
+
 		// the length of the password.
-		int l = userPassword.length();
+		int l = enterPassword.length();
+
 		// the number of characters.
-		int n = alphabet(userPassword);
+		int n = alphabet(enterPassword);
 
 		// Apply the formula.
+
 		double force = l * (Math.log(n) / Math.log(2));
 		long forceRest;
+
 		if (force <= 82) {
+
 			passWord.setText("Mot de passe invalide");
 			passWord.setBackground(Color.RED);
+
 			forceRest = 0;
+
 		} else {
+
 			forceRest = Math.round(force);
 		}
+
 		return forceRest;
 	}
 
 	public int alphabet(String userPassword) {
+
 		int n = 0;
 		Pattern regex1 = Pattern.compile("[0-9]");
 		Matcher matcher1 = regex1.matcher(userPassword);
+
 		if (matcher1.find()) {
 			n += 10;
 		}
+
 		Pattern regex2 = Pattern.compile("[a-z]");
 		Matcher matcher2 = regex2.matcher(userPassword);
+
 		if (matcher2.find()) {
 			n += 26;
 		}
+
 		Pattern regex3 = Pattern.compile("[A-Z]");
 		Matcher matcher3 = regex3.matcher(userPassword);
+
 		if (matcher3.find()) {
 
 			n += 26;
 		}
+
 		Pattern regex = Pattern.compile("[$&+,:;=?@#|]");
 		Matcher matcher = regex.matcher(userPassword);
+
 		if (matcher.find()) {
 			n += 8;
 		}

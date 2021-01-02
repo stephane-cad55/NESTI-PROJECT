@@ -15,7 +15,9 @@ public class Query extends MyConnection {
 	 * Action to read all the users.
 	 */
 	public static void readAll() {
+
 		try {
+
 			Statement declaration = MyConnection.accessDataBase.createStatement();
 			String query = "SELECT userName, userFirstName, userCity, userMail, userPseudo, userPassword";
 			ResultSet resultat = declaration.executeQuery(query);
@@ -33,7 +35,9 @@ public class Query extends MyConnection {
 
 				System.out.println(x.toString());
 			}
+
 		} catch (Exception e) {
+
 			System.err.println("user display error: " + e.getMessage());
 		}
 	}
@@ -46,13 +50,14 @@ public class Query extends MyConnection {
 	 */
 
 	public static void create(Users user) {
-		boolean flag = false;
-		try {
 
-			openConnection();
+		boolean flag = false;
+
+		try {
 
 			String query = "INSERT INTO `users`(`userName`, `userFirstName`, `userCity`, `userMail`, `userPseudo`, `userPassword`)values(?,?,?,?,?,?)";
 			PreparedStatement declaration = MyConnection.accessDataBase.prepareStatement(query);
+
 			declaration.setString(1, user.getUserName());
 			declaration.setString(2, user.getUserFirstName());
 			declaration.setString(3, user.getUserCity());
@@ -62,16 +67,20 @@ public class Query extends MyConnection {
 
 			int executeUpdate = declaration.executeUpdate();
 			flag = (executeUpdate == 1);
+
 		} catch (Exception e) {
+
 			System.err.println("user insertion error: " + e.getMessage());
 		}
+
 		return;
+
 	}
 
 	/*
 	 * User registration in the database.
 	 */
-	public static boolean selectUser(String userId, String userPassword) {
+	public static boolean selectUser(String UserMailOrPseudo, String userPassword) {
 
 		boolean flag = false;
 
@@ -84,8 +93,8 @@ public class Query extends MyConnection {
 			String query = "SELECT * FROM `users` WHERE userMail = ? OR userPseudo = ? AND userPassword = ?";
 			PreparedStatement declaration = MyConnection.accessDataBase.prepareStatement(query);
 
-			declaration.setString(1, userId);
-			declaration.setString(2, userId);
+			declaration.setString(1, UserMailOrPseudo);
+			declaration.setString(2, UserMailOrPseudo);
 			declaration.setString(3, userPassword);
 
 			ResultSet resultat = declaration.executeQuery();
@@ -112,13 +121,13 @@ public class Query extends MyConnection {
 	public static Users retrieveInformations(ResultSet resultat) throws SQLException {
 
 		Users user = new Users();
-		user.setUserId(resultat.getInt(1));
-		user.setUserName(resultat.getString(2));
-		user.setUserFirstName(resultat.getString(3));
-		user.setUserCity(resultat.getString(4));
-		user.setUserMail(resultat.getString(5));
-		user.setUserPseudo(resultat.getString(6));
-		user.setUserPassword(resultat.getString(7));
+
+		user.setUserName(resultat.getString(1));
+		user.setUserFirstName(resultat.getString(2));
+		user.setUserCity(resultat.getString(3));
+		user.setUserMail(resultat.getString(4));
+		user.setUserPseudo(resultat.getString(5));
+		user.setUserPassword(resultat.getString(6));
 
 		return user;
 	}
