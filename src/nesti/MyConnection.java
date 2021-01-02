@@ -42,7 +42,7 @@ public class MyConnection {
 		try {
 			if (accessDataBase != null) {
 				if (!accessDataBase.isClosed()) {
-					System.out.println("Connexion au serveur... OK");
+					System.out.println("connection to the server ... OK");
 					flag = true;
 				}
 			}
@@ -56,13 +56,16 @@ public class MyConnection {
 		if (accessDataBase != null) {
 			try {
 				accessDataBase.close();
-				System.out.println("Close connection");
+				System.out.println("close connection");
 			} catch (SQLException e) {
-				System.err.println("Erreur fermeture: " + e.getMessage());
+				System.err.println("closing error: " + e.getMessage());
 			}
 		}
 	}
 
+	/*
+	 * User insertion.
+	 */
 	public static void create(String users) {
 		try {
 			Statement declaration = (Statement) accessDataBase.createStatement();
@@ -70,13 +73,13 @@ public class MyConnection {
 
 			int executeUpdate = ((java.sql.Statement) declaration).executeUpdate(query);
 			if (executeUpdate == 1) {
-				System.out.println("insertion utilisateur effectué ! ");
+				System.out.println("user insertion carried out");
 			} else {
-				System.out.println("insertion utilisateur non effectue");
+				System.out.println("user insertion not carried out !");
 			}
 
 		} catch (Exception e) {
-			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
+			System.err.println("user insertion error: " + e.getMessage());
 		}
 	}
 }

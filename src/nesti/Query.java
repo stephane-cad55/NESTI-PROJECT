@@ -6,6 +6,7 @@ package nesti;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Query extends MyConnection {
@@ -33,7 +34,7 @@ public class Query extends MyConnection {
 				System.out.println(x.toString());
 			}
 		} catch (Exception e) {
-			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
+			System.err.println("user display error: " + e.getMessage());
 		}
 	}
 
@@ -62,49 +63,69 @@ public class Query extends MyConnection {
 			int executeUpdate = declaration.executeUpdate();
 			flag = (executeUpdate == 1);
 		} catch (Exception e) {
-			System.err.println("Erreur d'insertion utilisateur: " + e.getMessage());
+			System.err.println("user insertion error: " + e.getMessage());
 		}
 		return;
-
 	}
 
-	public static void selectUser(String email, String pseudo, String password) {
+	/*
+	 * User registration in the database.
+	 */
+	public static boolean selectUser(String userId, String userPassword) {
+
+		boolean flag = false;
 
 		try {
 
 			openConnection();
+
+			testConnection();
+
 			String query = "SELECT * FROM `users` WHERE userMail = ? OR userPseudo = ? AND userPassword = ?";
 			PreparedStatement declaration = MyConnection.accessDataBase.prepareStatement(query);
-			declaration.setString(1, email);
-			declaration.setString(2, pseudo);
-			declaration.setString(3, password);
+
+			declaration.setString(1, userId);
+			declaration.setString(2, userId);
+			declaration.setString(3, userPassword);
+
 			ResultSet resultat = declaration.executeQuery();
 
-			while (resultat.next()) {
+			if (resultat.next() == true) {
+				flag = true;
 
-				/*
-				 * Users user = new Users();
-				 * 
-				 * user.setUserName(resultat.getString("userName"));
-				 * user.setUserFirstName(resultat.getString("userFirstName"));
-				 * user.setUserCity(resultat.getString("userCity"));
-				 * user.setUserMail(resultat.getString("userMail"));
-				 * user.setUserPseudo(resultat.getString("userPseudo"));
-				 * user.setUserPassword(resultat.getString("userPassword"));
-				 */
-
-				System.out.println("Success");
+				Profil.user = retrieveInformations(resultat);
 			}
-			
-		/*	if(resultat.next() == true) {
-				Users bdd = new Users(resultat.getString(1), resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getString(5), resultat.getString(6));
-				Profil.user = bdd;
-			}*/
+
 		} catch (Exception e) {
-			System.err.println("Erreur d'affichage d'utilisateur: " + e.getMessage());
+
+			System.err.println("user display error: " + e.getMessage());
 		}
+
+		closeConnection();
+
+		return flag;
 	}
 
+	/*
+	 * Collect user information.
+	 */
+	public static Users retrieveInformations(ResultSet resultat) throws SQLException {
+
+		Users user = new Users();
+		user.setUserId(resultat.getInt(1));
+		user.setUserName(resultat.getString(2));
+		user.setUserFirstName(resultat.getString(3));
+		user.setUserCity(resultat.getString(4));
+		user.setUserMail(resultat.getString(5));
+		user.setUserPseudo(resultat.getString(6));
+		user.setUserPassword(resultat.getString(7));
+
+		return user;
+	}
+
+	/*
+	 * Function for changing or deleting user information.
+	 */
 	public static boolean update(int id, String nom, String prenom, String ville, String mail, String pseudo,
 			String motDePasse) {
 		return false;

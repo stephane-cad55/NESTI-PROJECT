@@ -20,15 +20,14 @@ import java.awt.event.ActionEvent;
 public class Profil {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField name;
+	private JTextField city;
+	private JTextField mail;
+	private JTextField pseudo;
+	private JTextField passWord;
 
 	public static Users user;
-	
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -52,7 +51,7 @@ public class Profil {
 		frame.getContentPane().add(lblNewLabel);
 
 		/**
-		 * information of the users connected to the nesti website.
+		 * Information of the users connected to the nesti website.
 		 */
 		JLabel lblNewLabel_1 = new JLabel("Vous \u00EAtes Mr ou Mme");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -89,38 +88,38 @@ public class Profil {
 		lblNewLabel_5.setBounds(29, 323, 95, 14);
 		frame.getContentPane().add(lblNewLabel_5);
 
-		//textField = new JTextField(user.getUserName());
-		textField.setBackground(Color.LIGHT_GRAY);
-		textField.setBounds(182, 106, 333, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextField name = new JTextField(user.getUserName());
+		name.setBackground(Color.LIGHT_GRAY);
+		name.setBounds(182, 106, 333, 20);
+		frame.getContentPane().add(name);
+		name.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBackground(Color.LIGHT_GRAY);
-		textField_1.setBounds(182, 157, 333, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JTextField city = new JTextField(user.getUserCity());
+		city.setBackground(Color.LIGHT_GRAY);
+		city.setBounds(182, 157, 333, 20);
+		frame.getContentPane().add(city);
+		city.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBackground(Color.LIGHT_GRAY);
-		textField_2.setBounds(182, 213, 333, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		JTextField mail = new JTextField(user.getUserMail());
+		mail.setBackground(Color.LIGHT_GRAY);
+		mail.setBounds(182, 213, 333, 20);
+		frame.getContentPane().add(mail);
+		mail.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setBackground(Color.LIGHT_GRAY);
-		textField_3.setBounds(182, 268, 333, 20);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		JTextField pseudo = new JTextField(user.getUserPseudo());
+		pseudo.setBackground(Color.LIGHT_GRAY);
+		pseudo.setBounds(182, 268, 333, 20);
+		frame.getContentPane().add(pseudo);
+		pseudo.setColumns(10);
 
-		textField_4 = new JTextField();
-		textField_4.setBackground(Color.LIGHT_GRAY);
-		textField_4.setBounds(182, 321, 333, 20);
-		frame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		JTextField passWord = new JTextField(user.getUserPassword());
+		passWord.setBackground(Color.LIGHT_GRAY);
+		passWord.setBounds(182, 321, 333, 20);
+		frame.getContentPane().add(passWord);
+		passWord.setColumns(10);
 
 		/**
-		 * button to modify or complete user information.
+		 * Button to modify or complete user information.
 		 */
 		JButton btnNewButton = new JButton("MODIFIER OU COMPLETER VOS INFORMATIONS");
 		btnNewButton.addActionListener(new ActionListener() {

@@ -2,8 +2,6 @@ package nesti;
 
 import java.io.*;
 
-
-
 public class Clavier {
 	public static String lireString() {// lecture d'une chaine
 		String ligne_lue = null;
@@ -17,14 +15,14 @@ public class Clavier {
 		return ligne_lue;
 	}
 
-////////////////**************************************
+////////////////********************************************
 	public static float lireFloat() {// lecture d'un float
 		float x = 0; // valeur à lire
 		try {
 			String ligne_lue = lireString();
 			x = Float.parseFloat(ligne_lue);
 		} catch (NumberFormatException err) {
-			System.out.println("***Erreur de données Réel attendu***");
+			System.out.println("***erreur de données Réel attendu***");
 			System.exit(0);
 		}
 		return x;
@@ -37,23 +35,22 @@ public class Clavier {
 			String ligne_lue = lireString();
 			x = Double.parseDouble(ligne_lue);
 		} catch (NumberFormatException err) {
-			System.out.println("***Erreur de données Double attendu***");
+			System.out.println("***erreur de données double attendu***");
 			System.exit(0);
 		}
 		return x;
 	}
 
-///////////*******************************************
+///////////************************************************
 	public static int lireInt() {// lecture d'un double
 		int x = 0; // valeur à lire
 		try {
 			String ligne_lue = lireString();
 			x = Integer.parseInt(ligne_lue);
 		} catch (NumberFormatException err) {
-			System.out.println("***Erreur de données Entier attendu***");
+			System.out.println("***erreur de données Entier attendu***");
 			System.exit(0);
 		}
 		return x;
 	}
 }
-///////////*******************************************

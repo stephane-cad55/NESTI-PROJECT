@@ -8,6 +8,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -23,8 +25,8 @@ import java.awt.event.ActionEvent;
 public class Connection {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textUserId;
+	private JTextField textUserPassWord;
 
 	/**
 	 * Create the application.
@@ -77,28 +79,39 @@ public class Connection {
 		lblNewLabel_4.setBounds(10, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
-		textField = new JTextField();
-		textField.setBackground(Color.LIGHT_GRAY);
-		textField.setBounds(210, 68, 323, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextField textUserId = new JTextField();
+		textUserId.setBackground(Color.LIGHT_GRAY);
+		textUserId.setBounds(210, 68, 323, 20);
+		frame.getContentPane().add(textUserId);
+		textUserId.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBackground(Color.LIGHT_GRAY);
-		textField_1.setBounds(210, 127, 323, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JTextField textUserPassword = new JTextField();
+		textUserPassword.setBackground(Color.LIGHT_GRAY);
+		textUserPassword.setBounds(210, 127, 323, 20);
+		frame.getContentPane().add(textUserPassword);
+		textUserPassword.setColumns(10);
 
 		/**
-		 * nesti website login button for already registered users.
+		 * Nesti website login button for already registered users.
 		 */
 		JButton btnNewButton = new JButton("CONNEXION\r\n");
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Query.selectUser(textField.getText(), textField.getText(), textField_1.getText());
-				frame.dispose();
-				Profil viewProfil = new Profil();
+
+				String userId = textUserId.getText();
+				String userPassword = textUserPassword.getText();
+
+				if (Query.selectUser(userId, userPassword) == true) {
+
+					frame.dispose();
+					Profil viewProfil = new Profil();
+
+				} else {
+
+					JOptionPane.showMessageDialog(frame, "Connexion impossible");
+				}
+
 			}
 		});
 		btnNewButton.setBackground(Color.BLACK);
@@ -107,7 +120,7 @@ public class Connection {
 		frame.getContentPane().add(btnNewButton);
 
 		/**
-		 * nesti site registration button (new users).
+		 * Nesti site registration button (new users).
 		 */
 		JButton btnNewButton_1 = new JButton("INSCRIPTION\r\n(nouvel utilisateur)");
 		btnNewButton_1.setForeground(Color.WHITE);

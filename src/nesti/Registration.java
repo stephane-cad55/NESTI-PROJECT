@@ -25,12 +25,12 @@ import java.awt.event.ActionEvent;
 public class Registration extends Connection {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField name;
+	private JTextField firstName;
+	private JTextField city;
+	private JTextField mail;
+	private JTextField pseudo;
+	private JTextField passWord;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
@@ -76,7 +76,7 @@ public class Registration extends Connection {
 		frame.getContentPane().add(lblNewLabel_1);
 
 		/**
-		 * information to be filled in for a first connection to the site nesti.
+		 * Information to be filled in for a first connection to the site nesti.
 		 */
 		JLabel lblNewLabel_2 = new JLabel("Votre nom :");
 		lblNewLabel_2.setForeground(Color.WHITE);
@@ -128,41 +128,41 @@ public class Registration extends Connection {
 		lblNewLabel_8.setBounds(10, 350, 158, 86);
 		frame.getContentPane().add(lblNewLabel_8);
 
-		textField = new JTextField();
-		textField.setBackground(Color.LIGHT_GRAY);
-		textField.setBounds(170, 83, 409, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextField name = new JTextField();
+		name.setBackground(Color.LIGHT_GRAY);
+		name.setBounds(170, 83, 409, 20);
+		frame.getContentPane().add(name);
+		name.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBackground(Color.LIGHT_GRAY);
-		textField_1.setBounds(170, 125, 409, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JTextField firstName = new JTextField();
+		firstName.setBackground(Color.LIGHT_GRAY);
+		firstName.setBounds(170, 125, 409, 20);
+		frame.getContentPane().add(firstName);
+		firstName.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBackground(Color.LIGHT_GRAY);
-		textField_2.setBounds(170, 170, 409, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		JTextField city = new JTextField();
+		city.setBackground(Color.LIGHT_GRAY);
+		city.setBounds(170, 170, 409, 20);
+		frame.getContentPane().add(city);
+		city.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setBackground(Color.LIGHT_GRAY);
-		textField_3.setBounds(170, 219, 409, 20);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		JTextField mail = new JTextField();
+		mail.setBackground(Color.LIGHT_GRAY);
+		mail.setBounds(170, 219, 409, 20);
+		frame.getContentPane().add(mail);
+		mail.setColumns(10);
 
-		textField_4 = new JTextField();
-		textField_4.setBackground(Color.LIGHT_GRAY);
-		textField_4.setBounds(170, 271, 409, 20);
-		frame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		JTextField pseudo = new JTextField();
+		pseudo.setBackground(Color.LIGHT_GRAY);
+		pseudo.setBounds(170, 271, 409, 20);
+		frame.getContentPane().add(pseudo);
+		pseudo.setColumns(10);
 
-		textField_5 = new JTextField();
-		textField_5.setBackground(Color.LIGHT_GRAY);
-		textField_5.setBounds(170, 320, 409, 20);
-		frame.getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		JTextField passWord = new JTextField();
+		passWord.setBackground(Color.LIGHT_GRAY);
+		passWord.setBounds(170, 320, 409, 20);
+		frame.getContentPane().add(passWord);
+		passWord.setColumns(10);
 
 		/**
 		 * Button registration new user.
@@ -170,19 +170,20 @@ public class Registration extends Connection {
 		JButton btnNewButton = new JButton("INSCRIPTION");
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 
-				if (!textField_3.getText().equals("")) {
+				if (!mail.getText().equals("")) {
 
-					if (addressEmailValid(textField_3.getText())) {
+					if (addressEmailValid(mail.getText())) {
 
-						if (forceMdp(textField_5.getText()) >= 83) {
+						if (forceMdp(userPassword, passWord) >= 83) {
 
-							Users user = new Users(textField.getText(), textField_1.getText(), textField_2.getText(),
-									textField_3.getText(), textField_4.getText(), textField_5.getText());
+							Users user = new Users(name.getText(), firstName.getText(), city.getText(), mail.getText(),
+									pseudo.getText(), passWord.getText());
 							Query.create(user);
 							frame.dispose();
-							Profil viewProfil = new Profil();
+							// Profil viewProfil = new Profil();
 
 						} else {
 
@@ -203,7 +204,7 @@ public class Registration extends Connection {
 	}
 
 	/**
-	 * email function.
+	 * Email function.
 	 * 
 	 * @param userMail.
 	 * @return
@@ -215,8 +216,8 @@ public class Registration extends Connection {
 		boolean IsMatch = m.matches();
 		System.out.println(IsMatch);
 		if (IsMatch == false) {
-			textField_3.setText("E-mail invalide");
-			textField_3.setBackground(Color.RED);
+			mail.setText("E-mail invalide");
+			mail.setBackground(Color.RED);
 			System.out.println(IsMatch);
 			IsMatch = false;
 		} else {
@@ -232,18 +233,18 @@ public class Registration extends Connection {
 	 * @param userPassword.
 	 * @return
 	 */
-	public long forceMdp(String userPassword) {
-		// La Longueur
+	public long forceMdp(String userPassword, JTextField passWord) {
+		// the length of the password.
 		int l = userPassword.length();
-		// Le nombre de caractères
+		// the number of characters.
 		int n = alphabet(userPassword);
 
-		// Appliquer la formule
+		// Apply the formula.
 		double force = l * (Math.log(n) / Math.log(2));
 		long forceRest;
 		if (force <= 82) {
-			textField_5.setText("Mot de passe invalide");
-			textField_5.setBackground(Color.RED);
+			passWord.setText("Mot de passe invalide");
+			passWord.setBackground(Color.RED);
 			forceRest = 0;
 		} else {
 			forceRest = Math.round(force);
@@ -256,19 +257,17 @@ public class Registration extends Connection {
 		Pattern regex1 = Pattern.compile("[0-9]");
 		Matcher matcher1 = regex1.matcher(userPassword);
 		if (matcher1.find()) {
-			// if (mdp.matches("")) {
 			n += 10;
 		}
 		Pattern regex2 = Pattern.compile("[a-z]");
 		Matcher matcher2 = regex2.matcher(userPassword);
 		if (matcher2.find()) {
-			// if (mdp.matches("a-z")) {
 			n += 26;
 		}
 		Pattern regex3 = Pattern.compile("[A-Z]");
 		Matcher matcher3 = regex3.matcher(userPassword);
 		if (matcher3.find()) {
-			// if (mdp.matches("A-Z")) {
+
 			n += 26;
 		}
 		Pattern regex = Pattern.compile("[$&+,:;=?@#|]");
