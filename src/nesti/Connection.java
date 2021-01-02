@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 public class Connection {
 
 	private JFrame frame;
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -96,20 +96,20 @@ public class Connection {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String userId = textUserMailOrPseudo.getText();
+
+				String user = textUserMailOrPseudo.getText();
 				String userPassword = textUserPassword.getText();
 
-				if (Query.selectUser(userId, userPassword) == true) {
+				if (Query.selectUser(user, userPassword) == true) {
 
 					frame.dispose();
 					Profil viewProfil = new Profil();
 
 				} else {
 
-					JOptionPane.showMessageDialog(frame, "Connexion impossible");
+					JOptionPane.showMessageDialog(frame,
+							"Connexion impossible, les champs marqués d'un astérique sont obligatoires ou l'utilisateur est inconnu!");
 				}
-
 			}
 		});
 		btnNewButton.setBackground(Color.BLACK);
