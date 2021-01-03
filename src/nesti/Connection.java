@@ -37,6 +37,7 @@ public class Connection {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(102, 102, 0));
 
@@ -53,9 +54,6 @@ public class Connection {
 		lblNewLabel.setBounds(10, 22, 201, 14);
 		frame.getContentPane().add(lblNewLabel);
 
-		/**
-		 * Connection to the nesti site with filling in the required information.
-		 */
 		JLabel lblNewLabel_1 = new JLabel("* E-mail ou Pseudo :");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -77,6 +75,9 @@ public class Connection {
 		lblNewLabel_4.setBounds(10, 195, 166, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 
+		/**
+		 * Connection to the nesti site with filling in the required information.
+		 */
 		JTextField textUserMailOrPseudo = new JTextField();
 		textUserMailOrPseudo.setBackground(Color.LIGHT_GRAY);
 		textUserMailOrPseudo.setBounds(210, 68, 323, 20);
@@ -124,6 +125,7 @@ public class Connection {
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				frame.dispose();
 				Registration viewRegistration = new Registration();
 			}

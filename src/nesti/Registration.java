@@ -62,9 +62,6 @@ public class Registration extends Connection {
 		lblNewLabel_1.setBounds(20, 52, 293, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 
-		/**
-		 * Information to be filled in for a first connection to the site nesti.
-		 */
 		JLabel lblNewLabel_2 = new JLabel("Votre nom :");
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -115,6 +112,9 @@ public class Registration extends Connection {
 		lblNewLabel_8.setBounds(10, 350, 158, 86);
 		frame.getContentPane().add(lblNewLabel_8);
 
+		/**
+		 * Information to be filled in for a first connection to the site nesti.
+		 */
 		JTextField name = new JTextField();
 		name.setBackground(Color.LIGHT_GRAY);
 		name.setBounds(170, 83, 409, 20);

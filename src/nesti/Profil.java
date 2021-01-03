@@ -45,9 +45,6 @@ public class Profil {
 		lblNewLabel.setBounds(23, 11, 398, 54);
 		frame.getContentPane().add(lblNewLabel);
 
-		/**
-		 * Information of the users connected to the nesti website.
-		 */
 		JLabel lblNewLabel_1 = new JLabel("Vous \u00EAtes Mr ou Mme");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,6 +80,9 @@ public class Profil {
 		lblNewLabel_5.setBounds(29, 323, 95, 14);
 		frame.getContentPane().add(lblNewLabel_5);
 
+		/**
+		 * Informations of the users connected to the nesti website.
+		 */
 		JTextField name = new JTextField(user.getUserName());
 		name.setBackground(Color.LIGHT_GRAY);
 		name.setBounds(182, 106, 333, 20);

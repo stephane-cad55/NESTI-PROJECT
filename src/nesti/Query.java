@@ -135,13 +135,51 @@ public class Query extends MyConnection {
 	/*
 	 * Function for changing or deleting user information.
 	 */
-	public static boolean update(int id, String nom, String prenom, String ville, String mail, String pseudo,
-			String motDePasse) {
-		return false;
+	public static boolean update(String name, String firstName, String city, String pseudo, String passWord) {
+
+		boolean success = false;
+
+		try {
+			String query = "UPDATE users SET userName = ?, userFirstName = ? , userCity = ? , userPseudo = ?, userPassword = ? WHERE userMail = ?";
+			PreparedStatement declaration = accessDataBase.prepareStatement(query);
+
+			declaration.setString(1, name);
+			declaration.setString(2, firstName);
+			declaration.setString(3, city);
+			declaration.setString(5, pseudo);
+			declaration.setString(6, passWord);
+
+			int executeUpdate = declaration.executeUpdate();
+			success = (executeUpdate == 1);
+
+		} catch (SQLException e) {
+
+			System.err.println("error update" + e.getMessage());
+		}
+		return success;
 	}
 
-	public static boolean delete(int id, String nom, String prenom, String ville, String mail, String pseudo,
-			String motDePasse) {
-		return false;
+	public static boolean delete(String name, String firstName, String city, String pseudo, String passWord) {
+
+		boolean success = false;
+
+		try {
+			String query = "DELETE FROM users WHERE userMail = ?";
+			PreparedStatement declaration = accessDataBase.prepareStatement(query);
+
+			declaration.setString(1, name);
+			declaration.setString(2, firstName);
+			declaration.setString(3, city);
+			declaration.setString(5, pseudo);
+			declaration.setString(6, passWord);
+
+			int executeUpdate = declaration.executeUpdate();
+			success = (executeUpdate == 1);
+
+		} catch (SQLException e) {
+
+			System.err.println("error deletion" + e.getMessage());
+		}
+		return success;
 	}
 }

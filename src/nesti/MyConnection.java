@@ -12,7 +12,7 @@ public class MyConnection {
 	static java.sql.Connection accessDataBase = null;
 
 	/**
-	 * Connecting to my nesti database.
+	 * Connecting to my nesti database. Open the connection.
 	 * 
 	 * @throws SQLException.
 	 */
@@ -20,20 +20,20 @@ public class MyConnection {
 		/* Connection settings */
 		String url = "jdbc:mysql://127.0.0.1/nesti";
 		// nesti ==> name of my database
-		String utilisateur = "root";
-		String motDePasse = "";
+		String user = "root";
+		String passWord = "";
 		try {
 			System.out.println("try to connect");
 			// we add our parameters
 
-			accessDataBase = DriverManager.getConnection(url, utilisateur, motDePasse);
+			accessDataBase = DriverManager.getConnection(url, user, passWord);
 		} catch (SQLException ex) {
 			System.err.print(Connection.class.getName() + ex.getMessage());
 		}
 	}
 
 	/**
-	 * True if the connection is OK.
+	 * True if the connection is OK. Test the connection.
 	 * 
 	 * @return
 	 */
@@ -52,6 +52,9 @@ public class MyConnection {
 		return flag;
 	}
 
+	/*
+	 * Close the connection.
+	 */
 	public static void closeConnection() {
 		if (accessDataBase != null) {
 			try {
