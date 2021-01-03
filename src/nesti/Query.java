@@ -133,21 +133,21 @@ public class Query extends MyConnection {
 	}
 
 	/*
-	 * Function for changing or deleting user information.
+	 * Function to modify or complete the information.
 	 */
-	public static boolean update(String name, String firstName, String city, String pseudo, String passWord) {
+	public static boolean update(String name, String city, String pseudo, String passWord, String email) {
 
 		boolean success = false;
 
 		try {
-			String query = "UPDATE users SET userName = ?, userFirstName = ? , userCity = ? , userPseudo = ?, userPassword = ? WHERE userMail = ?";
+			String query = "UPDATE users SET userName = ?, userCity = ? , userPseudo = ?, userPassword = ? WHERE userMail = ?";
 			PreparedStatement declaration = accessDataBase.prepareStatement(query);
 
 			declaration.setString(1, name);
-			declaration.setString(2, firstName);
-			declaration.setString(3, city);
-			declaration.setString(5, pseudo);
-			declaration.setString(6, passWord);
+			declaration.setString(2, city);
+			declaration.setString(3, pseudo);
+			declaration.setString(4, passWord);
+			declaration.setString(5, email);
 
 			int executeUpdate = declaration.executeUpdate();
 			success = (executeUpdate == 1);
@@ -155,30 +155,6 @@ public class Query extends MyConnection {
 		} catch (SQLException e) {
 
 			System.err.println("error update" + e.getMessage());
-		}
-		return success;
-	}
-
-	public static boolean delete(String name, String firstName, String city, String pseudo, String passWord) {
-
-		boolean success = false;
-
-		try {
-			String query = "DELETE FROM users WHERE userMail = ?";
-			PreparedStatement declaration = accessDataBase.prepareStatement(query);
-
-			declaration.setString(1, name);
-			declaration.setString(2, firstName);
-			declaration.setString(3, city);
-			declaration.setString(5, pseudo);
-			declaration.setString(6, passWord);
-
-			int executeUpdate = declaration.executeUpdate();
-			success = (executeUpdate == 1);
-
-		} catch (SQLException e) {
-
-			System.err.println("error deletion" + e.getMessage());
 		}
 		return success;
 	}

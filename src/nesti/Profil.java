@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 public class Profil {
 
 	private JFrame frame;
-	public boolean clickButton;
 
 	public static Users user;
 
@@ -121,16 +120,11 @@ public class Profil {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (clickButton == true) {
+				MyConnection.openConnection();
 
-					MyConnection.openConnection();
+				Query.update(name.getText(), city.getText(), pseudo.getText(), passWord.getText(), mail.getText());
 
-					Users user = new Users();
-
-					Query.create(user);
-
-					MyConnection.closeConnection();
-				}
+				MyConnection.closeConnection();
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);
