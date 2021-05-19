@@ -167,7 +167,7 @@ public class Registration extends Connection {
 						String enterPassword = passWord.getText();
 						System.out.println(enterPassword);
 
-						if (forceMdp(enterPassword, passWord) >= 83) {
+						if (forceMdp(enterPassword, passWord) == true) {
 
 							MyConnection.openConnection();
 
@@ -207,36 +207,78 @@ public class Registration extends Connection {
 	 */
 	public boolean addressEmailValid(String userMail, JTextField mail) {
 
-		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-		java.util.regex.Matcher m = p.matcher(userMail);
+		// String ePattern =
+		// "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		// java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		// java.util.regex.Matcher m = p.matcher(userMail);
 
-		boolean IsMatch = m.matches();
+		boolean isMatch = this.checkEmail(userMail);
 
-		System.out.println(IsMatch);
+		System.out.println(isMatch);
 
-		if (IsMatch == false) {
+		if (isMatch == false) {
 
 			mail.setText("E-mail invalide");
 			mail.setBackground(Color.RED);
-			System.out.println(IsMatch);
-			IsMatch = false;
-
-		} else {
-
-			IsMatch = m.matches();
+			// System.out.println(isMatch);
 		}
 
-		return IsMatch;
+		return isMatch;
 	}
 
 	/**
-	 * Password strength function.
+	 * Email function for TestUnit
+	 * 
+	 * @param userMail.
+	 * @return
+	 */
+	public boolean checkEmail(String mail) {
+		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		java.util.regex.Matcher m = p.matcher(mail);
+
+		boolean isMatch = m.matches();
+		return isMatch;
+	}
+
+	/**
+	 * Password strength function
 	 * 
 	 * @param userPassword.
 	 * @return
 	 */
-	public long forceMdp(String enterPassword, JTextField passWord) {
+	public boolean forceMdp(String enterPassword, JTextField passWord) {
+
+		// the length of the password.
+//		int l = enterPassword.length();
+
+		// the number of characters.
+//		int n = alphabet(enterPassword);
+
+		// Apply the formula.
+
+//		double force = l * (Math.log(n) / Math.log(2));
+
+		Color forceRest = this.checkForceMdp(enterPassword);
+		passWord.setBackground(forceRest);
+
+		boolean isValid = true;
+		if (forceRest.equals(Color.RED)) {
+
+			passWord.setText("Mot de passe invalide");
+			isValid = false;
+		}
+
+		return isValid;
+	}
+
+	/**
+	 * Password strength function for TestUnit
+	 * 
+	 * @param userPassword.
+	 * @return
+	 */
+	public Color checkForceMdp(String enterPassword) {
 
 		// the length of the password.
 		int l = enterPassword.length();
@@ -247,20 +289,21 @@ public class Registration extends Connection {
 		// Apply the formula.
 
 		double force = l * (Math.log(n) / Math.log(2));
-		long forceRest;
+		force = Math.round(force);
+		Color forceRest;
 
-		if (force <= 82) {
+		if (force >= 82) {
+			forceRest = Color.GREEN;
 
-			passWord.setText("Mot de passe invalide");
-			passWord.setBackground(Color.RED);
+		} else if (force >= 60) {
+			forceRest = Color.YELLOW;
 
-			forceRest = 0;
+		} else if (force >= 40) {
+			forceRest = Color.ORANGE;
 
 		} else {
-
-			forceRest = Math.round(force);
+			forceRest = Color.RED;
 		}
-
 		return forceRest;
 	}
 
